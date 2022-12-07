@@ -25,7 +25,11 @@ public class Main {
             System.out.println("------------------------------------------");
             if (choice == 1) {
               paiFist = Paimon.attack3();
-              System.out.println("Paimon attacks for " + paiFist + " health points!");
+              if(paiFist == Paimon.getDmg()*10) {
+                System.out.println("Paimon crits for " + paiFist + " health points!");
+              } else {
+                System.out.println("Paimon attacks for " + paiFist + " health points");
+              }
               Slime.getSlap(paiFist);
               if(slime.isDead2() == false) {
                 System.out.println();

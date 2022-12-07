@@ -35,6 +35,8 @@ public class Paimon {
     return dead;
   }
 
+  public int getDmg() {return strength*level;}
+
   public void slapped(int amount) {
     health -= amount;
     if (health <= 0) {
@@ -55,12 +57,16 @@ public class Paimon {
   }
   public int attack3() {
     crit = (int) (Math.random() * 6) + 1;
-    if (crit == 4) {
-      int dmg = strength * level;
-      return dmg * 10;
-    } else {
-      int dmg = strength * level;
-      return dmg;
+    if (choice == 1) {
+      if (crit == 4) {
+        int dmg = strength * level;
+        return dmg * 10;
+      } else {
+        int dmg = strength * level;
+        return dmg;
+      }
+    } else if(choice == 2){
+
     }
   }
 
@@ -88,6 +94,19 @@ public class Paimon {
       return 0;
     } else {
       return dmg;
+    }
+  }
+
+  public void skills() {
+    String skill = "";
+    if (getLevel3() == 2) {
+      skill += "Windblade(1)\n";
+    }
+    if(getLevel3() == 5) {
+      skill += "Food for Paimon!(2)";
+    }
+    if(getLevel3() == 10) {
+      skill += "Ultimate Paimon Text";
     }
   }
 }
