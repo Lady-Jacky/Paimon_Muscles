@@ -1,8 +1,8 @@
 public class Slime {
-    private int health;
-    private int strength;
-    private int level;
-    private boolean dead;
+    private static int health;
+    private static int strength;
+    private static int level;
+    private static boolean dead;
 
     public Slime() {
         health = 25;
@@ -23,21 +23,36 @@ public class Slime {
         return level;
     }
 
-    public boolean isDead2() {
+    public static boolean isDead2() {
         return dead;
     }
 
-    public void getSlap(int amount) {
+    public static void getSlap(int amount) {
         health -= amount;
+        if (health <= 0) {
+            health = 0;
+        }
+        if (dead != true) {
+            System.out.println("The slime takes " + amount + " damage and now has " + (health) + " health");
+            if (health <= 0) {
+                health = 0;
+                System.out.println("The slime has been slayed!");
+                dead = true;
+            }
+        }
     }
 
-    public int attack2() {
+    public static int attack2() {
         int dmg = strength * level;
         System.out.println("The slime attacks for " + dmg + " health points!");
         return dmg;
     }
 
-    public String state2() {
-        return ("Slime: \nStrength = " + strength + "\nHealth = " + health + "\nLevel = " + level    + "\nDead = " + dead);
+    public static String state2() {
+        return ("Slime: \nStrength = " + strength + "\nHealth = " + health + "\nLevel = " + level);
+    }
+
+    public int xpGive() {
+        return level*2;
     }
 }

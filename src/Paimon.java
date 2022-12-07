@@ -6,16 +6,16 @@ public class Paimon {
   private boolean dead;
   private int xp;
   private int xpCap;
-  private boolean levelUp;
+  private int crit = 0;
   
 
   public Paimon() {
-    health = 100;
-    strength = 1;
+    health = 25;
+    healthCap = 25;
+    strength = 2;
     level = 1;
     dead = false;
     xpCap = 2;
-    levelUp = false;
     xp = 0;
   }
 
@@ -50,24 +50,44 @@ public class Paimon {
     }
   }
 
+  public void fullHeal() {
+    health = healthCap;
+  }
   public int attack3() {
-    int dmg = strength * level;
-    return dmg;
+    crit = (int) (Math.random() * 6) + 1;
+    if (crit == 4) {
+      int dmg = strength * level;
+      return dmg * 10;
+    } else {
+      int dmg = strength * level;
+      return dmg;
+    }
   }
 
-  public void LevelUp3(int xp) {
+  public void LevelUp3(int exp) {
+    xp += exp;
     if (xp >= xpCap) {
       level++;
-      System.out.println("The Paimon has reached level + " + level);
-      health += 10;
+      System.out.println("Paimon has reached leveled up to level " + level + "!\nHealth + 10\nStrength + 1\nXP needed to level up: " + xpCap * 2);
+      System.out.println("------------------------------------------");
+      healthCap *= 2;
       strength++;
       xp -= xpCap;
       xpCap *= 2;
     }
   }
 
-  public String state() {
-    return ("Paimon: \nStrength = " + strength + "\nHealth = " + health + "\nLevel = " + level
-        + "\nDead = " + dead + "\nXP = " + xp + "/" + xpCap);
+  public String state3() {
+    return ("Paimon: \nStrength = " + strength + "\nHealth = " + health + "/" + healthCap + "\nLevel = " + level
+        +"\nXP = " + xp + "/" + xpCap);
+  }
+
+  public int defend(int dmg) {
+    int chance = (int)(Math.random() * 3) + 1;
+    if(chance%2 == 1) {
+      return 0;
+    } else {
+      return dmg;
+    }
   }
 }
